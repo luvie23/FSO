@@ -1,0 +1,4 @@
+browser->>server: POST request to the json file with new note
+server: updates json file
+server->>browser: Sends response with update new json file
+browser: reloads page with updated json file

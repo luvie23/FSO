@@ -1,0 +1,3 @@
+browser->>server: sends new note to update json file
+server->>updates: json file
+browser: updates list dynamically through javascript and prevents a redirect or reload

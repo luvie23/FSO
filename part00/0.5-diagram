@@ -1,0 +1,5 @@
+browser->>server: sends request for the html
+server->>browser: sends html
+browser->>server: sends request for the json file
+server->>browser: sends json file
+browser: displays data
