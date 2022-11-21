@@ -1,4 +1,12 @@
 
+const Total = (props) => {
+  console.log(props)
+  return(
+    <p>Total of {props.number.reduce((acc, value) => {
+      return acc + value; }, 0)} exercises</p>
+  )
+}
+
 const Part = (props) => {
   return(
     <p>{props.name} {props.exercises}</p>
@@ -6,7 +14,7 @@ const Part = (props) => {
 }
 
 const Course = (props) =>{
-  console.log(props)
+
   return(
     <div>
       <h1>{props.course.name}</h1>
@@ -14,8 +22,10 @@ const Course = (props) =>{
         {props.course.parts.map(part =>
             <Part key={part.id} name={part.name} exercises={part.exercises}/>
           )}
-
       </div>
+      <Total number={props.course.parts.map(part =>{
+          return part.exercises
+        })}/>
     </div>
   )
 }
