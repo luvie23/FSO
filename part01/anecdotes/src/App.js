@@ -44,7 +44,7 @@ const App = () => {
 
   const [points, setPoints] = useState({})
 
-  const maxVotes = Object.keys(points).reduce(function(a, b){ return points[a] > points[b] ? a : b }, points[selected]);
+  const maxVotes = Object.keys(points).reduce(function(a, b){ return points[a] > points[b] ? a : b }, points[0]);
 
   const randomAnecdote = () => {
     setSelected(Math.floor(Math.random()*anecdotes.length))
@@ -61,7 +61,6 @@ const App = () => {
       copy[element] += 1
       setPoints(copy)
     }
-    
   }
 
 
