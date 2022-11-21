@@ -6,6 +6,21 @@ const Button = (props) => {
   )
 }
 
+const Votes = (props) => {
+  console.log(props.votes)
+  if (props.votes === undefined) {
+    return(
+      <p>no votes yet</p>
+    )
+  } else{
+    return(
+      <p>Has {props.votes} votes</p>
+      
+    )
+  }
+
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -19,8 +34,26 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
 
+  const [points, setPoints] = useState({})
+
+
+
   const randomAnecdote = () => {
     setSelected(Math.floor(Math.random()*anecdotes.length))
+    console.log(points)
+  }
+
+  const vote = (element) =>{
+    const copy = {...points}
+    if (!copy.hasOwnProperty(element)){
+      copy[element] = 1
+      setPoints(copy)
+      console.log(points)
+    } else {
+      copy[element] += 1
+      setPoints(copy)
+      console.log(points)
+    }
   }
 
 
@@ -28,6 +61,8 @@ const App = () => {
     <div>
       {anecdotes[selected]}
       <br></br>
+      <Votes votes={points[selected]}/>
+      <Button handleClick={() => {vote(selected)}} text='vote'/>
       <Button handleClick={randomAnecdote} text='next anecdote'/>
     </div>
   )
