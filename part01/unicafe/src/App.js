@@ -13,11 +13,13 @@ const Header = (props) => {
   )
 }
 
-const Feedback = (props) => {
+const Statistics = (props) => {
   return(
     <p>{props.text} {props.feedback}</p>
   )
 }
+
+
 
 const App = () => {
   // save clicks of each button to its own state
@@ -62,12 +64,12 @@ const App = () => {
       <Button handleClick={() => func('neutral')} text='neutral'/>
       <Button handleClick={() => func('bad')} text='bad'/>
       <Header text='Statistics'/>
-      <Feedback feedback={good} text='good'/>
-      <Feedback feedback={neutral} text='neutral'/>
-      <Feedback feedback={bad}text='bad'/>
-      <Feedback feedback={all.length} text='all'/>
-      <Feedback feedback={allAverage()} text='average'/>
-      <Feedback feedback={positiveFeedback()} text='positive'/>
+      <Statistics feedback={good} text='good'/>
+      <Statistics feedback={neutral} text='neutral'/>
+      <Statistics feedback={bad}text='bad'/>
+      <Statistics feedback={all.length} text='all'/>
+      <Statistics feedback={allAverage()} text='average'/>
+      <Statistics feedback={positiveFeedback()} text='positive'/>
     </div>
   )
 }
