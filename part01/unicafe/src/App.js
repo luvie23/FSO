@@ -14,8 +14,10 @@ const Header = (props) => {
 }
 
 const Statistics = (props) => {
+
   return(
-    <p>{props.text} {props.feedback}</p>
+    <p>good {props.good}<br/>neutral {props.neutral}<br/> <br/> bad {props.bad}<br/> all {props.all}<br/> average {props.average}<br/> positive {props.positive}</p>
+    
   )
 }
 
@@ -64,12 +66,7 @@ const App = () => {
       <Button handleClick={() => func('neutral')} text='neutral'/>
       <Button handleClick={() => func('bad')} text='bad'/>
       <Header text='Statistics'/>
-      <Statistics feedback={good} text='good'/>
-      <Statistics feedback={neutral} text='neutral'/>
-      <Statistics feedback={bad}text='bad'/>
-      <Statistics feedback={all.length} text='all'/>
-      <Statistics feedback={allAverage()} text='average'/>
-      <Statistics feedback={positiveFeedback()} text='positive'/>
+      <Statistics good={good} neutral={neutral} bad={bad} all={all.length} average={allAverage()} positive={positiveFeedback()}/>
     </div>
   )
 }
