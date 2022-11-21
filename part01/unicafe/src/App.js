@@ -24,18 +24,36 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  const [all, setAll] = useState([])
 
   const func = (option) => {
     if (option === 'good'){
       setGood(good + 1)
+      setAll(all.concat(1))
 
     } else if (option === 'neutral'){
       setNeutral(neutral + 1)
+      setAll(all.concat(0))
+
 
     } else if (option === 'bad'){
       setBad(bad + 1)
+      setAll(all.concat(-1))
+
     }
   }
+
+  function allAverage() {
+    if (all.length != 0){
+    return (all.reduce((a, b) => a + b) / all.length)
+    }
+  }
+
+  function positiveFeedback() {
+    if (all.length >= 1){
+    return (100 * good) / all.length + '%'
+    }
+  } 
 
   return (
     <div>
@@ -47,6 +65,9 @@ const App = () => {
       <Feedback feedback={good} text='good'/>
       <Feedback feedback={neutral} text='neutral'/>
       <Feedback feedback={bad}text='bad'/>
+      <Feedback feedback={all.length} text='all'/>
+      <Feedback feedback={allAverage()} text='average'/>
+      <Feedback feedback={positiveFeedback()} text='positive'/>
     </div>
   )
 }
