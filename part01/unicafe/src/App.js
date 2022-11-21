@@ -14,9 +14,13 @@ const Header = (props) => {
 }
 
 const Statistics = (props) => {
-
+  if (props.all === 0){
+    return (
+      <p>No Feedback Given</p>
+    )
+  }
   return(
-    <p>good {props.good}<br/>neutral {props.neutral}<br/> <br/> bad {props.bad}<br/> all {props.all}<br/> average {props.average}<br/> positive {props.positive}</p>
+    <p>good {props.good}<br/>neutral {props.neutral}<br/> bad {props.bad}<br/> all {props.all}<br/> average {props.average}<br/> positive {props.positive}</p>
     
   )
 }
