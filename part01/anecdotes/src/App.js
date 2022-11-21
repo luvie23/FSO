@@ -7,7 +7,6 @@ const Button = (props) => {
 }
 
 const Votes = (props) => {
-  console.log(props.votes)
   if (props.votes === undefined) {
     return(
       <p>no votes yet</p>
@@ -18,7 +17,16 @@ const Votes = (props) => {
       
     )
   }
+}
 
+const Anecdote = (props) => {
+  
+  return(
+    <div>
+      <h1>{props.text}</h1>
+      {props.anecdote}
+    </div>
+  )
 }
 
 const App = () => {
@@ -36,11 +44,11 @@ const App = () => {
 
   const [points, setPoints] = useState({})
 
-
+  const maxVotes = Object.keys(points).reduce(function(a, b){ return points[a] > points[b] ? a : b }, points[selected]);
 
   const randomAnecdote = () => {
     setSelected(Math.floor(Math.random()*anecdotes.length))
-    console.log(points)
+
   }
 
   const vote = (element) =>{
@@ -48,22 +56,22 @@ const App = () => {
     if (!copy.hasOwnProperty(element)){
       copy[element] = 1
       setPoints(copy)
-      console.log(points)
+
     } else {
       copy[element] += 1
       setPoints(copy)
-      console.log(points)
     }
+    
   }
 
 
   return (
     <div>
-      {anecdotes[selected]}
-      <br></br>
+      <Anecdote anecdote={anecdotes[selected]} text='Anecdote of the day'/>
       <Votes votes={points[selected]}/>
       <Button handleClick={() => {vote(selected)}} text='vote'/>
       <Button handleClick={randomAnecdote} text='next anecdote'/>
+      <Anecdote anecdote={anecdotes[maxVotes]} text='Anecdote with most votes'/>
     </div>
   )
 }
