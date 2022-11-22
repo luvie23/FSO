@@ -14,9 +14,10 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [newSearch, setNewSearch] = useState('')
 
   const handleNameChange = (e) => {
-
+  
     setNewName(e.target.value)
   }
 
@@ -25,13 +26,29 @@ const App = () => {
     setNewNumber(e.target.value)
   }
 
+  const handleSearchChange = (e) => {
+
+    setNewSearch(e.target.value)
+    
+  }
+
+  const checkString = (person) => {
+    return person.name.toUpperCase().includes(newSearch.toUpperCase())
+  }
+
+
+  const search = () => {
+    const newPersons = persons.filter(checkString)
+    return newPersons
+  }
+
   //goes through the phonebook and compares the new entry
   const checkDuplicate = (person) => {
     return person.name === newName
   }
 
   const addName = (e) => {
-    e.preventDefault()
+    e.preventDefault() 
     if (!persons.filter(checkDuplicate).length > 0) {
 
       const newPerson = {
@@ -51,9 +68,16 @@ const App = () => {
   
   return (
     <div>
-      <div>debug: {newName}</div>
 
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
+
+      <div>
+        search: <input  
+        value={newSearch}
+        onChange={handleSearchChange}/>
+      </div>
+      
+      <h2>add a new person</h2>
       <form onSubmit={addName}>
         <div>
           name: <input 
@@ -71,7 +95,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map(person =>
+        {search().map(person =>
             <Name key={person.name} person={person}/>
           )}
       </ul>
