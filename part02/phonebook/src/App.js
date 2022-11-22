@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 const Name = (props ) => {
   return(
-    <li>{props.person.name}</li>
+    <li>{props.person.name} {props.person.number}</li>
   )
 }
 
@@ -13,10 +13,16 @@ const App = () => {
     { name: 'Arto Hellas' }
   ]) 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
   const handleNameChange = (e) => {
 
     setNewName(e.target.value)
+  }
+
+  const handleNumberChange = (e) => {
+
+    setNewNumber(e.target.value)
   }
 
   //goes through the phonebook and compares the new entry
@@ -29,7 +35,8 @@ const App = () => {
     if (!persons.filter(checkDuplicate).length > 0) {
 
       const newPerson = {
-        name: newName
+        name: newName,
+        number: newNumber
   
       }
       setPersons(persons.concat(newPerson))
@@ -52,6 +59,11 @@ const App = () => {
           name: <input 
           value={newName}
           onChange={handleNameChange}/>
+        </div>
+        <div>
+          number: <input 
+          value={newNumber}
+          onChange={handleNumberChange}/>
         </div>
         <div>
           <button type="submit">add</button>
