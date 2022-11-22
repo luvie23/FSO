@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+
+
 const Name = (props ) => {
   return(
     <li>{props.person.name}</li>
@@ -13,23 +15,33 @@ const App = () => {
   const [newName, setNewName] = useState('')
 
   const handleNameChange = (e) => {
-    console.log(e.target.value)
+
     setNewName(e.target.value)
+  }
+
+  //goes through the phonebook and compares the new entry
+  const checkDuplicate = (person) => {
+    return person.name === newName
   }
 
   const addName = (e) => {
     e.preventDefault()
-    const newPerson = {
-      name: newName
+    if (!persons.filter(checkDuplicate).length > 0) {
 
+      const newPerson = {
+        name: newName
+  
+      }
+      setPersons(persons.concat(newPerson))
+      setNewName('')
+    } else{ 
+      alert(`${newName} is already in the phonebook`)
+      console.log(persons)
     }
-    setPersons(persons.concat(newPerson))
-    setNewName('')
+
   }
 
   
-
-
   return (
     <div>
       <div>debug: {newName}</div>
