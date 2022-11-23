@@ -1,45 +1,28 @@
 import { useState } from 'react'
+import Input from './components/Input'
+import Filter from './components/Filter'
 
 
-
-const Name = (props ) => {
-  return(
-    <li>{props.person.name} {props.person.number}</li>
-  )
-}
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
-  ]) 
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
+  ])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
 
-  const handleNameChange = (e) => {
-  
+  const handleNameChange = (e) => { 
     setNewName(e.target.value)
   }
-
   const handleNumberChange = (e) => {
-
     setNewNumber(e.target.value)
   }
-
   const handleSearchChange = (e) => {
-
     setNewSearch(e.target.value)
-    
-  }
-
-  const checkString = (person) => {
-    return person.name.toUpperCase().includes(newSearch.toUpperCase())
-  }
-
-
-  const search = () => {
-    const newPersons = persons.filter(checkString)
-    return newPersons
   }
 
   //goes through the phonebook and compares the new entry
@@ -65,40 +48,37 @@ const App = () => {
 
   }
 
-  
   return (
     <div>
 
       <h1>Phonebook</h1>
 
-      <div>
-        search: <input  
-        value={newSearch}
-        onChange={handleSearchChange}/>
-      </div>
-      
+      <Input
+      text='search:'
+      value={newSearch}
+      function={handleSearchChange}
+      />
       <h2>add a new person</h2>
       <form onSubmit={addName}>
-        <div>
-          name: <input 
-          value={newName}
-          onChange={handleNameChange}/>
-        </div>
-        <div>
-          number: <input 
-          value={newNumber}
-          onChange={handleNumberChange}/>
-        </div>
+        <Input
+        text='name:'
+        value={newName}
+        function={handleNameChange}
+        />
+        <Input 
+        text='number' 
+        value={newNumber}
+        function={handleNumberChange}
+        />
         <div>
           <button type="submit">add</button>
         </div>
       </form>
       <h2>Numbers</h2>
-      <ul>
-        {search().map(person =>
-            <Name key={person.name} person={person}/>
-          )}
-      </ul>
+      <Filter
+      persons={persons}
+      search={newSearch}
+      />
     </div>
   )
 }
