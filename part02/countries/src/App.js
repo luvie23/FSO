@@ -14,7 +14,7 @@ function App() {
   }
 
 
-
+  //api call to get country data
   useEffect(() => {
     axios
     .get('https://restcountries.com/v3.1/all')
