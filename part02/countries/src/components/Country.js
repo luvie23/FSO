@@ -1,3 +1,5 @@
+import Weather from './Weather'
+
 
 const Country = (props) => {
     return (
@@ -12,6 +14,12 @@ const Country = (props) => {
             })}
             </p>
             <h1>{props.country.flag}</h1>
+            <Weather 
+            latlng={props.country.latlng}
+            />
+            <p>
+                {}
+            </p>
         </div>
   )}
 
