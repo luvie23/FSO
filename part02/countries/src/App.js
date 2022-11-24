@@ -23,7 +23,7 @@ function App() {
       
     })
   }, [])
-  console.log(countries)
+
 
 
 
@@ -37,6 +37,7 @@ function App() {
       <Filter
       countries={countries}
       search={search}
+      setNewSearch={setNewSearch}
       />
     </div>
 

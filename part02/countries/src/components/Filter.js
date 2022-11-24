@@ -1,10 +1,16 @@
 import { getValue } from '@testing-library/user-event/dist/utils'
 import Name from './Name'
+import Country from './Country'
 
 const Filter = (props) => {
     const checkString = (country) => {
         return country.name.common.toUpperCase().includes(props.search.toUpperCase())
       }
+    
+    const onClickFunction = (country) =>{
+      
+      props.setNewSearch(country)
+    }
 
     const search = () => {
       return props.countries.filter(checkString)
@@ -13,18 +19,8 @@ const Filter = (props) => {
     if (search().length === 1){
       return(
         <div>{search().map(country =>
-          <div>
-            <h1>{country.name.official}</h1>
-            <p>Capital: {country.capital}</p>
-            <p>Area: {country.area}</p>
-            <h2>Languages</h2>
-            <p>
-              {Object.keys(country.languages).map((val, k) => {
-                return <li key={k}>{country.languages[val]}</li>
-              })}
-            </p>
-            <h1>{country.flag}</h1>
-            </div>
+          <Country key={country.name.common}
+          country={country}/>
             )}
 
         </div>
@@ -37,7 +33,7 @@ const Filter = (props) => {
     return(
       <ul >
         {search().map(country =>
-          <Name key={country.name.common} country={country}/>
+          <Name key={country.name.common} country={country} onClickFunction={onClickFunction}/>
         )}
       </ul>
     )
