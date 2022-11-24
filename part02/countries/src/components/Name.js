@@ -1,6 +1,6 @@
 const Name = (props ) => {
     return(
-      <li>{props.country.name.common}</li>
+      <li >{props.country.name.common}</li>
     )
   }
 
