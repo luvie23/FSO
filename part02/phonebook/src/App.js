@@ -53,10 +53,21 @@ const App = () => {
         
       })
     } else{ 
-      alert(`${newName} is already in the phonebook`)
-      console.log(persons)
+      if (window.confirm(`Replace ${newName}'s number?`)){
+        updateNumber()
+      }
     }
 
+  }
+
+  const updateNumber = () => {
+    const person = persons.find(n => n.name === newName)
+    const changedPerson = {...person, number: newNumber}
+
+    services.update(person.id, changedPerson)
+    .then(response => {
+      setPersons(persons.map(n => n.id !== person.id ? n : response))
+    })
   }
 
   const remove = (id, name) => {
