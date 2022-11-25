@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Input from './components/Input'
 import Filter from './components/Filter'
+import Notification from './components/Notification'
 import axios from 'axios'
 import services from './services/phonebook'
 
@@ -11,6 +12,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
+  const [message, setNewMessage] = useState('')
 
   useEffect(() => {
     services.getAll()
@@ -20,6 +22,7 @@ const App = () => {
     })
   })
 
+  
 
   const handleNameChange = (e) => { 
     setNewName(e.target.value)
@@ -48,8 +51,13 @@ const App = () => {
       services.create(newPerson)
       .then(response => {
         setPersons(persons.concat(response))
+        setNewMessage(`${newName} added to the phonebook`)
+        setTimeout(() => {
+          setNewMessage(``)
+        }, 5000)
         setNewName('')
         setNewNumber('')
+        
         
       })
     } else{ 
@@ -82,7 +90,7 @@ const App = () => {
     <div>
 
       <h1>Phonebook</h1>
-
+      <Notification message={message}/>
       <Input
       text='search:'
       value={newSearch}
