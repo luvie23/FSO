@@ -15,7 +15,7 @@ const App = () => {
   useEffect(() => {
     services.getAll()
     .then(response => {
-      console.log('promise fulfilled')
+
       setPersons(response)
     })
   })
@@ -59,6 +59,14 @@ const App = () => {
 
   }
 
+  const remove = (id, name) => {
+    if (window.confirm(`Delete ${name}?`)){
+      services.remove(id)
+    }
+    
+
+  }
+
   return (
     <div>
 
@@ -89,6 +97,7 @@ const App = () => {
       <Filter
       persons={persons}
       search={newSearch}
+      remove={remove}
       />
     </div>
   )

@@ -1,6 +1,10 @@
 import Name from './Name'
 
+
+
+
 const Filter = (props) => {
+
     const checkString = (person) => {
         return person.name.toUpperCase().includes(props.search.toUpperCase())
       }
@@ -12,7 +16,7 @@ const Filter = (props) => {
     return(
       <ul>
         {search().map(person =>
-          <Name key={person.name} person={person}/>
+          <Name key={person.name} person={person} remove={() => props.remove(person.id, person.name)}/>
         )}
       </ul>
     )
