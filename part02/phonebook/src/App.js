@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Input from './components/Input'
 import Filter from './components/Filter'
 import Notification from './components/Notification'
-import axios from 'axios'
+
 import services from './services/phonebook'
 
 
@@ -17,10 +17,9 @@ const App = () => {
   useEffect(() => {
     services.getAll()
     .then(response => {
-
       setPersons(response)
     })
-  })
+  },[])
 
   
 
@@ -83,7 +82,6 @@ const App = () => {
       services.remove(id)
     }
     
-
   }
 
   return (
