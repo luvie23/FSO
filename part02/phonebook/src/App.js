@@ -33,47 +33,26 @@ const App = () => {
     setNewSearch(e.target.value)
   }
 
-  //goes through the phonebook and compares the new entry
-  const checkDuplicate = (person) => {
-    return person.name === newName
-  }
-
   const addName = (e) => {
     e.preventDefault() 
-    if (!persons.filter(checkDuplicate).length > 0) {
 
-      const newPerson = {
-        name: newName,
-        number: newNumber
-  
-      }
-      services.create(newPerson)
-      .then(response => {
-        setPersons(persons.concat(response))
-        setNewMessage(`${newName} added to the phonebook`)
-        setTimeout(() => {
-          setNewMessage(``)
-        }, 5000)
-        setNewName('')
-        setNewNumber('')
-        
-        
-      })
-    } else{ 
-      if (window.confirm(`Replace ${newName}'s number?`)){
-        updateNumber()
-      }
+
+    const newPerson = {
+      name: newName,
+      number: newNumber
+
     }
-
-  }
-
-  const updateNumber = () => {
-    const person = persons.find(n => n.name === newName)
-    const changedPerson = {...person, number: newNumber}
-
-    services.update(person.id, changedPerson)
+    services.create(newPerson)
     .then(response => {
-      setPersons(persons.map(n => n.id !== person.id ? n : response))
+      setPersons(persons.concat(response))
+      setNewMessage(`${newName} added to the phonebook`)
+      setTimeout(() => {
+        setNewMessage(``)
+      }, 5000)
+      setNewName('')
+      setNewNumber('')
+      
+      
     })
   }
 
